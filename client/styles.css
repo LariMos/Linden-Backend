@@ -1,0 +1,33 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+* {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+.container {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    margin: 20px;
+    /* justify-content: center; */
+    align-items: center;
+    min-height: 100vh;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    color:rgb(255, 255, 255);
+    background-size: cover;
+    /* background-image: url("https://cdn.britannica.com/31/219531-050-E2B2ACC7/Linden-Tree-Lime-Tree-Tilia-Leaves.jpg"); */
+    background-image: url("https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcQ7h48Szy31QZyONEjKuznGoH0w4ZZqNS4n02QzDg2ywpZDY_ZQpok1_h7yjo1b_nbtq6cV0NNIGJPDgiU");
+
+}
+
+header {
+    font-size: 8vw;
+    font-weight: 200;
+}
