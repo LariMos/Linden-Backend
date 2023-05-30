@@ -12,8 +12,9 @@ Unter Den Linden is an app designed to support individuals with Alzheimer's by p
 <a href="https://imgur.com/LhKm5or"><img src="https://i.imgur.com/LhKm5or.jpg" title="source: imgur.com" /></a>
 
 
+<a href="https://imgur.com/tj8nyvK"><img src="https://i.imgur.com/tj8nyvK.jpg" title="source: imgur.com" /></a>
 
-
+<a href="https://imgur.com/cnFc6y7"><img src="https://i.imgur.com/cnFc6y7.png" title="source: imgur.com" /></a>
 
 ## GitHub Links
 https://github.com/LariMos/Unter-Den-Linden-Frontend.git
@@ -58,7 +59,7 @@ category
 summary
 imageURL
 
-
+```javascript
 const articleSchema = new mongoose.Schema({
   articleId: {
     type: String,
@@ -112,6 +113,7 @@ const userSchema = new mongoose.Schema({
     ref: 'Article',
   }],
 });
+```
 
 API Links: 
 https://developer.nytimes.com/apis 
@@ -151,4 +153,4 @@ Example:
 - Add memory exercises to the profile such as sudoku, new language learning (duolingo)
 
 
-By incorporating these features, MindConnect aims to provide a valuable resource for individuals with Alzheimer's, promoting memory training, social interaction, and cognitive stimulation.
+By incorporating these features, Unter Den Linden aims to provide a valuable resource for individuals with Alzheimer's, promoting memory training, social interaction, and cognitive stimulation.
