@@ -24,40 +24,38 @@ https://github.com/LariMos/Unter-Den-Linden-Backend.git
 ## Routes and models
 <!-- Define your routes and what HTTP method they will be using -->
 
-Authentication Routes:
+### Routes
+#### Authentication Routes:
+    - POST /signup: Creates a new user account.
+    - POST /login: Authenticates a user and generates a session token.
 
-POST /signup: Creates a new user account.
-POST /login: Authenticates a user and generates a session token.
+#### User Profile Routes:
+    - GET /profile : Retrieves the user's profile information.
+    - PUT /profile : Updates the user's profile information.
+#### Article Routes:
+    -GET /articles : Retrieves a list of articles based on specified filters (year, date).
+    -GET /articles/:id : Retrieves a specific article by its ID.
+    -POST /articles/:id/save : Saves an article to the user's saved articles list.
+    -DELETE /articles/:id/delete : Deletes a saved article from the user's list.
 
-User Profile Routes:
+#### AI Chat Routes (stretch goals):
+    -POST /articles/:id/chat : Triggers an AI chat interaction related to the article with the user.
 
-GET /profile: Retrieves the user's profile information.
-PUT /profile: Updates the user's profile information.
-Article Routes:
-GET /articles: Retrieves a list of articles based on specified filters (year, date).
-GET /articles/:id: Retrieves a specific article by its ID.
-POST /articles/:id/save: Saves an article to the user's saved articles list.
-DELETE /articles/:id/delete: Deletes a saved article from the user's list.
+### Models:
 
-AI Chat Routes:
+    - User:
+        - username
+        -password
+        -savedArticles (array of article IDs)
 
-POST /articles/:id/chat: Triggers an AI chat interaction related to the article with the user.
-
-MODELS:
-
-User:
-username
-password
-savedArticles (array of article IDs)
-
-Article:
-title
-date
-content
-author
-category
-summary
-imageURL
+    -Article:
+        -title
+        -date
+        -content
+        -author
+        -category
+        -summary
+        -imageURL
 
 ```javascript
 const articleSchema = new mongoose.Schema({
@@ -115,9 +113,9 @@ const userSchema = new mongoose.Schema({
 });
 ```
 
-API Links: 
-https://developer.nytimes.com/apis 
-https://developer.nytimes.com/docs/archive-product/1/overview
+#### API Links: 
+    - https://developer.nytimes.com/apis 
+    - https://developer.nytimes.com/docs/archive-product/1/overview
 
 
 
@@ -140,9 +138,11 @@ Example:
 #### MVP Goals
 <!-- These features are the minimum to get your application working.  -->
 
-- User authentication and profile management functionality.
+- Implement user authentication and profile management.
+- Integrate MongoDB to store user and article data.
 - Retrieval and display of New York Times articles based on year and date filters.
-- Saving and deleting articles from the user's saved list.
+- Enable browsing and filtering of articles.
+- Allow users to save and delete articles from their profiles.
 
 #### Stretch Goals
 
