@@ -16,10 +16,31 @@
 <body>
     <div class="container" id="intro-page">
         <header>UNTER DEN LINDEN</header>
-        <button id="log-in">Log In</button>
+        <!-- Log In button to access -->
+        <!-- <button id="log-in">Log In</button>  -->
+        <!-- Search article by year -->
+        <!-- <button id="get-article">Get Article</button> -->
+        <!-- <div id="article"></div> -->
+        <!-- Delete article -->
+        <!-- <button id="delete-article">Delete Article</button> -->
+        <form id="search-form">
+            <label for="year-input">Year:</label>
+            <input type="text" id="year-input" required>
+            <label for="month-input">Month:</label>
+            <input type="text" id="month-input" required>
+            <button type="submit">Search</button>
+            <p id="error-message" class="error-message"></p>
+        </form>
     </div>
-    <div></div>
-    <div></div>
-    <div></div>  
+
+    <div class="chat-container">
+        <div class="chat-log" id="chat-log"></div>
+        <div class="input-container">
+          <input type="text" id="user-input" placeholder="Type your message...">
+          <button id="send-button">Send</button>
+        </div>
+      </div>
+
+    <div class="container" id="articles-container"></div>
 </body>
 </html>

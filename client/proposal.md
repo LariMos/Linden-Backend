@@ -42,8 +42,8 @@ https://github.com/LariMos/Unter-Den-Linden-Backend.git
     -POST /articles/:id/chat : Triggers an AI chat interaction related to the article with the user.
 
 ### Models:
-
-    - User:
+    -SuperUser
+    - User(move to stretch):
         - username
         -password
         -savedArticles (array of article IDs)
