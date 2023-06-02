@@ -3,7 +3,7 @@ import { seedDatabase } from './seed/seed.js';
 import db from './db/connections.js';
 
 import express from 'express';
-import axios from 'axios';
+// import axios from 'axios';
 // import { Configuration, OpenAIApi } from 'openai';
 
 const app = express();

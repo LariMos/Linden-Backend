@@ -1,66 +1,174 @@
-// PACKAGES AND MODULES
-//axios for making API requests 
-//fs for file system operations
-//path for resolving file paths
 import axios from 'axios';
 import dotenv from 'dotenv';
 import Article from '../models/article.model.js';
-// The dotenv package is used to load environment variables from a .env file
 dotenv.config();
 
 // API KEY
-const apiKey = process.env.API_KEY; //The apiKey is retrieved from the environment variable process.env.API_KEY.
-const secret = process.env.SECRET;
+const apiKey = process.env.API_KEY;
 console.log('ApiKey testing', apiKey);
+let year = 1956;
+let month = 1;
+let articles;
 
-// Seeding
-export const seedDatabase = async () => {
+async function getData() {
   try {
+    const response = await axios.get(`https://api.nytimes.com/svc/archive/v1/${year}/${month}.json?api-key=${apiKey}`);
+    articles = response.data.response.docs.slice(0,3);
+    return articles;
+  } catch (error) {
+    console.log('Error', error);
+    throw error; // Rethrow the error to handle it in the calling code
+  }
+}
+
+async function fetchAndLogData() {
+  try {
+    const data = await getData();
+    console.log('This is data', data);
+    return data;
+  } catch (error) {
+    console.log(error);
+    throw error; // Rethrow the error to handle it in the calling code
+  }
+}
+
+async function seedDatabase() {
+  try {
+    const data = await fetchAndLogData();
+
+    console.log("this is test data",data);
+
     // Clean db before seeding
- 
-    // The API call is made to the New York Times Archive API using axios.get, and the response data is processed.
-    await axios
-      .get(`https://api.nytimes.com/svc/archive/v1/{year}/{month}.json?api-key=${apiKey}`, {
-        headers: {
-          'Authorization': `Bearer ${secret}`
-        }
-      })
-      .then(response => response.data)
-      .then((response) => {
-        const articles = response.data.response.docs; //The articleData array is populated with the relevant article information extracted from the API response.
-        const articleData = articles.map((article) => ({
-          articleID: article._id,
-          title: article.headline.main,
-          date: article.pub_date,
-          content: article.abstract,
-          author: article.byline.original,
-          category: article.section_name,
-          summary: article.snippet,
-          imageURL: article.multimedia.length > 0 ? article.multimedia[0].url : '',
-          year: year,
-          month: month,
-        }));
+    // await Article.deleteMany({});
 
-        return Article.create(articleData); //The Article.create method is used to create new documents in the Article collection based on the articleData array.
-      })
-      .catch((error) => console.error('Error fetching data from the New York Times API:', error)); //Error handling is implemented for catching any errors that may occur during the seeding process.
+    const articleData = data.map((article) => {
+        return {
+              title: article.headline.main,
+              date: article.pub_date,
+              author: article.byline.original,
+              category: article.section_name,
+              summary: article.snippet,
+              imageURL: article.multimedia.length > 0 ? article.multimedia[0].url : ''
+              }
+        });
 
+    // await Article.create(articleData);
+    await Article.insertMany(articleData);
     console.log('Database seeding completed.');
   } catch (error) {
     console.error('Error seeding database:', error);
   }
-};
+}
 
+// Call the function to fetch data and seed the database
 seedDatabase();
+
+
+
+
+//2 TEST
+
+// PACKAGES AND MODULES
+// import axios from 'axios';
+// import dotenv from 'dotenv';
+// import Article from '../models/article.model.js';
+// dotenv.config();
+// // import mongoose from 'mongoose';
+// // const mongoose = require('mongoose');
+
+// // API KEY
+// const apiKey = process.env.API_KEY;
+// console.log('ApiKey testing', apiKey);
+
+// // Seeding
+// export const seedDatabase = async () => {
+//   try {
+//     // Clean db before seeding
+//     // await Article.deleteMany({}, { maxTimeMS: 30000 });
+//     let year = 1956;
+//     let month = 1;
+//     const maxResults = 1; // Maximum number of articles to retrieve
+
+//     // The API call is made to the New York Times Archive API using axios.get, and the response data is processed.
+//     const response = await axios.get(`https://api.nytimes.com/svc/archive/v1/${year}/${month}.json?api-key=${apiKey}`);
+//     const articles = response.data.response.docs.slice(0, maxResults); // Retrieve only the first 20 articles
+
+//     const articleData = articles.map((article) => ({
+//       articleID: article._id,
+//       title: article.headline.main,
+//       date: article.pub_date,
+//       author: article.byline.original,
+//       category: article.section_name,
+//       summary: article.snippet,
+//       imageURL: article.multimedia.length > 0 ? article.multimedia[0].url : ''
+//     }));
+
+//     await Article.create(articleData);
+
+//     console.log('Database seeding completed.');
+//   } catch (error) {
+//     console.error('Error seeding database:', error);
+//   }
+// };
+
+// seedDatabase();
+
+//3 TEST
+
+// // PACKAGES AND MODULES
+// import axios from 'axios';
+// import dotenv from 'dotenv';
+// import Article from '../models/article.model.js';
+// dotenv.config();
+
+// // API KEY
+// const apiKey = process.env.API_KEY;
+// console.log('ApiKey testing', apiKey);
+
+
+// // Seeding
+// export const seedDatabase = async () => {
+//   try {
+//     // Clean db before seeding
+//     // await Article.deleteMany({}, { maxTimeMS: 30000 });
+//     let year = 1956;
+//     let month = 1;
+//     const maxResults = 10;// Maximum number of articles to retrieve
+
+
+//     // The API call is made to the New York Times Archive API using axios.get, and the response data is processed.
+//     const response = await axios.get(`https://api.nytimes.com/svc/archive/v1/${year}/${month}.json?api-key=${apiKey}`);
+//     // const articles = response.data.response.docs;
+//     const articles = response.data.response.docs.slice(0, maxResults);
+//     console.log(response.data.response.docs);
+
+//     const articleData = articles.map((article) => ({
+//       articleID: article._id, 
+//       title: article.headline.main,
+//       date: article.pub_date,
+//     //   content: article.abstract,
+//       author: article.byline.original,
+//       category: article.section_name,
+//       summary: article.snippet,
+//       imageURL: article.multimedia.length > 0 ? article.multimedia[0].url : ''
+//     }));
+
+//     await Article.create(articleData);
+
+//     console.log('Database seeding completed.');
+//   } catch (error) {
+//     console.error('Error seeding database:', error);
+//   }
+// };
+
+// seedDatabase();
+
 
 // seedDatabase(year,month); //The seedDatabase function is invoked at the end to trigger the seeding process.
 //The function accepts the year and month parameters that are used in the API request URL to fetch articles for the specified year and month
 
 
-
-
-
-
+//OPEN AI TEST
 
 // const { Configuration, OpenAIApi } = require("openai");
 

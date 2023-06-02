@@ -1,49 +1,79 @@
 import mongoose from 'mongoose'
 
-const articleSchema = new mongoose.Schema({
-    articleId: {
+const Article = new mongoose.Schema({
+    _id: {
       type: String,
-      required: true,
-      unique: true,
+    //   required: true,
+    //   unique: true,
     },
     title: {
-      type: String,
-      required: true,
+      type: String
+    //   required: true,
     },
     date: {
-      type: Date,
-      required: true,
+      type: Date
+    //   required: true,
     },
-    // content: {
-    //   type: String,
+    content: {
+      type: String
     //   required: true,
-    // },
-    // author: {
-    //   type: String,
+    },
+    author: {
+      type: String
     //   required: true,
-    // },
-    // category: {
-    //   type: String,
+    },
+    category: {
+      type: String
     //   required: true,
-    // },
-    // summary: {
-    //   type: String,
-    //   required: true,
-    // },
+    },
+    summary: {
+      type: String
+    },
     imageURL: {
-      type: String,
-      required: true,
-    },
-    year: {
-        type: Number,
-        required: true,
-      },
-      month: {
-        type: Number,
-        required: true,
-      },
+      type: String
+    }
   });
 
-const Article = mongoose.model('Article', articleSchema)
+ export default mongoose.model('article', Article);
 
-export default Article
+
+
+// import mongoose from 'mongoose'
+
+// const Article = new mongoose.Schema({
+//     _id: {
+//       type: String,
+//     //   required: true,
+//     //   unique: true,
+//     },
+//     title: {
+//       type: String
+//     //   required: true,
+//     },
+//     date: {
+//       type: Date
+//     //   required: true,
+//     },
+//     content: {
+//       type: String
+//     //   required: true,
+//     },
+//     author: {
+//       type: String
+//     //   required: true,
+//     },
+//     category: {
+//       type: String
+//     //   required: true,
+//     },
+//     summary: {
+//       type: String
+//     },
+//     imageURL: {
+//       type: String
+//     }
+//   });
+
+// const Article = mongoose.model('Article', articleSchema)
+
+// export default Article
