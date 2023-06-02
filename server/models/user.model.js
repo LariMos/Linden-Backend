@@ -9,11 +9,11 @@ const superuserSchema = new mongoose.Schema({
     password: {
       type: String,
       required: true,
-    },
-    savedArticles: [{
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Article',
-    }],
+    }
+    // savedArticles: [{
+    //   type: mongoose.Schema.Types.ObjectId,
+    //   ref: 'Article',
+    // }],
   });
 
   const Superuser = mongoose.model('Superuser', superuserSchema)

@@ -11,11 +11,7 @@ console.log('Secret testing', secret);
 // const month = 5;
 
 
-axios.get(`https://api.nytimes.com/svc/archive/v1/{year}/{month}.json?api-key=${apiKey}`, {
-  headers: {
-    'Authorization': `Bearer ${secret}`,
-  },
-})
+axios.get(`https://api.nytimes.com/svc/archive/v1/{year}/{month}.json?api-key=${apiKey}`)
   .then(response => response.data)
   .then(data => {
     // `data` contains the JSON data from the API response

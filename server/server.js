@@ -1,31 +1,53 @@
 // Packages and modules
 import { seedDatabase } from './seed/seed.js';
 import db from './db/connections.js';
-
 import express from 'express';
-import axios from 'axios';
+import router from './routes/article.routes.js';
+import Article from './models/article.model.js'
+import dotenv from 'dotenv';
+
+const PORT = process.env.PORT || 3000;
+dotenv.config();
+
+
+// const router = express.Router();
+
+// Fixed connection to server by moving the app.listen from the connections.js into the server.js and commented out the db.on in the server.js + Mongoose installed
+
 // import { Configuration, OpenAIApi } from 'openai';
 
 const app = express();
+app.use(express.json());
+
+//Connecting to routes
+app.use('/', router);
+
+// app.get('/', (req, res) => {
+//     res.send('response');
+// });
+
+app.listen(PORT, () => {
+  console.log('Server is running');
+})
 
 // Database and data
-import Article from './models/article.model.js';
+// import Article from './models/article.model.js';
 
-db.on('connected', async () => {
-  console.log(`Connected to MongoDB ${db.name} at ${db.host}:${db.port}`);
+// db.on('connected', async () => {
+//   console.log(`Connected to MongoDB ${db.name} at ${db.host}:${db.port}`);
   
   // Once MongoDB is connected, populate the database
-  try {
-    // Clean the Article collection before seeding
-    await Article.deleteMany({});
+//   try {
+//     // Clean the Article collection before seeding
+//     // await Article.deleteMany({});
     
-    await seedDatabase(); // Call the seedDatabase function to populate the database
+//     // await seedDatabase(); // Call the seedDatabase function to populate the database
 
-    console.log('Database seeding completed.');
-  } catch (error) {
-    console.error('Error seeding database:', error);
-  }
-});
+//     // console.log('Database seeding completed.');
+//   } catch (error) {
+//     console.error('Error seeding database:', error);
+//   }
+// });
 
 
 

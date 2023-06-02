@@ -1,22 +1,43 @@
 import Article from '../models/article.model.js';
 
+
 const ArticleController = {
-  getArticles: async (req, res) => {
+
+  getOneArticleEasy: async (req, res) => {
     try {
-      const { year, month } = req.query;
+      const id = req.params.id;
 
       // Build the query based on the provided filters
+      // const query = {};
+
+      // if (title) {
+      //   query.title = { $regex: title, $options: 'i' };
+      // }
+
+      // Retrieve articles based on the specified filters (title)
+      const articles = await Article.findById(id);
+
+      res.status(200).json(articles);
+    } catch (error) {
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  },
+  
+  getArticlesByYear: async (req, res) => {
+    try {
+      const { year } = req.query;
+
+      // Build the query based on the provided year
       const query = {};
 
       if (year) {
-        query.year = year;
+        // Extract the year from the date field
+        query.$expr = {
+          $eq: [{ $year: '$date' }, parseInt(year)],
+        };
       }
 
-      if (month) {
-        query.month = month;
-      }
-
-      // Retrieve articles based on the specified filters (year, month)
+      // Retrieve articles based on the specified year
       const articles = await Article.find(query);
 
       res.status(200).json(articles);
@@ -24,6 +45,8 @@ const ArticleController = {
       res.status(500).json({ error: 'Internal server error' });
     }
   },
+
+
 
   getArticleById: async (req, res) => {
     try {
@@ -73,3 +96,4 @@ const ArticleController = {
 };
 
 export default ArticleController;
+

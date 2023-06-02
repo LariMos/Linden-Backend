@@ -1,31 +1,35 @@
-import mongoose from 'mongoose'
-import * as dotenv from 'dotenv'
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+import express from 'express';
 
 // Setup dotenv
-dotenv.config()
+dotenv.config();
+const app = express();
+app.use(express.json());
 
 // Env variables
-const DATABASE_URI = process.env.DATABASE_URI
-const ENVIRONMENT = process.argv[2] || process.env.ENVIRONMENT
-const COLLECTION = process.env.COLLECTION ? process.env.COLLECTION : 'test'
+const ENVIRONMENT = process.env.ENVIRONMENT || 'prod';
+const DATABASE_URI = process.env.MONGODB_URI;
+const PORT = process.env.PORT || 3000;
+
+console.log(DATABASE_URI)
+console.log(PORT)
 
 // Setup database
-let db = mongoose.connection
-db.collection(COLLECTION)
-// db config
-let mongooseConfig = {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-}
+mongoose.connection.on('error', console.error.bind(console, 'MongoDB connection error:'));
+mongoose.connection.on('connected', () => console.log('MongoDB connected'));
+mongoose.connection.on('disconnected', () => console.log('MongoDB disconnected'));
 
-// Connect to your production db
-if (ENVIRONMENT === "prod") {
-    mongoose.connect(DATABASE_URI, mongooseConfig)
-}
-// Connect to your local db
-else {
-    mongoose.connect(`mongodb://127.0.0.1:27017/article`, mongooseConfig)
-    console.log('I am connected')
-}
+// Connect to the specified MongoDB URI
+mongoose.connect(DATABASE_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
-export default db 
+// app.listen(PORT, function(err) {
+//   if (err) console.log('Error in server setup');
+//   console.log('Server listening on Port', PORT);
+// });
+
+export default mongoose.connection;
+
