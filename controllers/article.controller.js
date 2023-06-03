@@ -1,45 +1,35 @@
-import Article from '../models/article.model.js';
+import Article from '../../BACK/models/article.model.js';
 
 
 const ArticleController = {
 
-  getOneArticleEasy: async (req, res) => {
+  getArticlesByYearAndMonth: async (req, res) => {
     try {
-      const id = req.params.id;
-
-      // Build the query based on the provided filters
-      // const query = {};
-
-      // if (title) {
-      //   query.title = { $regex: title, $options: 'i' };
-      // }
-
-      // Retrieve articles based on the specified filters (title)
-      const articles = await Article.findById(id);
-
-      res.status(200).json(articles);
-    } catch (error) {
-      res.status(500).json({ error: 'Internal server error' });
-    }
-  },
+      const { year, month } = req.query;
   
-  getArticlesByYear: async (req, res) => {
-    try {
-      const { year } = req.query;
-
-      // Build the query based on the provided year
+      // Build the query based on the provided year and month
       const query = {};
-
+  
       if (year) {
         // Extract the year from the date field
         query.$expr = {
           $eq: [{ $year: '$date' }, parseInt(year)],
         };
       }
-
-      // Retrieve articles based on the specified year
+  
+      if (month) {
+        // Extract the month from the date field
+        query.$expr = {
+          $and: [
+            query.$expr,
+            { $eq: [{ $month: '$date' }, parseInt(month)] },
+          ],
+        };
+      }
+  
+      // Retrieve articles based on the specified year and month
       const articles = await Article.find(query);
-
+  
       res.status(200).json(articles);
     } catch (error) {
       res.status(500).json({ error: 'Internal server error' });

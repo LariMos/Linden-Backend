@@ -10,4 +10,3 @@ const Article = new mongoose.Schema({
 });
 
 export default mongoose.model('NYTarticle', Article);
-

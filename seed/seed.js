@@ -1,6 +1,6 @@
 import axios from 'axios';
 import dotenv from 'dotenv';
-import Article from '../models/article.model.js';
+import Article from '../../BACK/models/article.model.js';
 
 dotenv.config();
 
@@ -26,7 +26,7 @@ async function fetchAndLogData() {
     const allArticles = [];
 
     for (let year = startYear; year <= endYear; year++) {
-      for (let month = 1; month <= 12; month++) {
+      for (let month = 1; month <= 6; month++) {
         const articles = await getData(year, month);
         allArticles.push(...articles);
       }
@@ -61,6 +61,8 @@ async function seedDatabase() {
     console.error('Error seeding database:', error);
   }
 }
+
+// seedDatabase();
 
 export { seedDatabase };
 

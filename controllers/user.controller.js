@@ -1,4 +1,5 @@
-import User from '../models/user.model.js';
+import User from '../../BACK/models/user.model.js';
+
 
 const UserController = {
   getUserProfile: async (req, res) => {
@@ -20,7 +21,7 @@ const UserController = {
 
   updateUserProfile: async (req, res) => {
     try {
-      const userId = req.user.id; // Assuming you have implemented authentication and have access to the user ID
+      const userId = req.user.id; // Assuming implemented authentication and have access to the user ID
       const updatedProfile = req.body;
 
       // Update the user's profile information
