@@ -8,5 +8,5 @@ const Article = new mongoose.Schema({
   imageURL: String,
   webURL: String
 });
-
+ 
 export default mongoose.model('NYTarticle', Article);

@@ -9,7 +9,7 @@ let mongooseConfig = {
     useNewUrlParser: true,
     useUnifiedTopology: true 
 }
-
+ 
 mongoose.connect(DATABASE_URI, mongooseConfig)
 
 mongoose.connection.on('connected', () => {console.log('MongoDB Connected')})

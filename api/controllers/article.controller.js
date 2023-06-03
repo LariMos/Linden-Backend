@@ -3,7 +3,7 @@ import Article from '../models/article.model.js';
 
 const ArticleController = {
 
-  getArticlesByYearAndMonth: async (req, res) => {
+  getArticlesByYearAndMonth: async (req, res) => { 
     try {
       const { year, month } = req.query;
   
@@ -87,3 +87,4 @@ const ArticleController = {
 
 export default ArticleController;
 
+ 

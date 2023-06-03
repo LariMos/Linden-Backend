@@ -17,5 +17,5 @@ const superuserSchema = new mongoose.Schema({
   });
 
   const Superuser = mongoose.model('Superuser', superuserSchema)
-
+ 
 export default Superuser

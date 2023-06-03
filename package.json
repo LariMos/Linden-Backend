@@ -9,7 +9,7 @@
     "start": "node server.js",
     "prod": "nodemon --inspect server.js prod",
     "dev": "nodemon --inspect server.js dev"
-  },
+  }, 
   "keywords": [],
   "author": "",
   "license": "ISC",

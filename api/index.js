@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 4000;
 
 
 // Import user routes and controllers
-import userRouter from './routes/user.routes.js';
+import userRouter from './routes/user.routes.js'; 
 
 // Import article routes and controllers
 import router from './routes/article.routes.js';
