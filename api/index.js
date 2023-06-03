@@ -26,7 +26,7 @@ app.use('/', router);
 
 
 app.listen(PORT, () => {
-  console.log('Server is running');
+  console.log('Server is running on '+PORT);
 })
 
 //SHOW CONNECTION TO MONGODB 
