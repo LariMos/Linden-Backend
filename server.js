@@ -1,7 +1,7 @@
 // Packages and modules
 // import { seedDatabase } from '../BACK/seed/seed.js';
 import express from 'express';
-import connection from '../BACK/db/connections.js';
+import connection from './db/connections.js';
 import dotenv from 'dotenv';
 import cors from 'cors';
 
@@ -10,10 +10,10 @@ const PORT = process.env.PORT || 4000;
 
 
 // Import user routes and controllers
-import userRouter from '../BACK/routes/user.routes.js';
+import userRouter from './routes/user.routes.js';
 
 // Import article routes and controllers
-import router from '../BACK/routes/article.routes.js';
+import router from './routes/article.routes.js';
 
 const app = express();
 app.use(express.json());

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import dotenv from 'dotenv';
-import Article from '../../BACK/models/article.model.js';
+import Article from '../models/article.model.js'
+
 
 dotenv.config();
 
