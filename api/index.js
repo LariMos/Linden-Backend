@@ -21,7 +21,7 @@ app.use(cors());
 
 // Connecting to routes
 // app.use('/', userRouter, router);
-app.use('/', router);
+app.use('/api', router);
 
 
 
