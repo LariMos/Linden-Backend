@@ -20,7 +20,7 @@ app.use(express.json());
 app.use(cors());
 
 // Connecting to routes
-// app.use('/', userRouter, router);
+app.use('/api', userRouter);
 app.use('/api', router);
 
 

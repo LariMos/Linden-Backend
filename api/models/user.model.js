@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-const superuserSchema = new mongoose.Schema({
+const User = new mongoose.Schema({
     username: {
       type: String,
       required: true,
@@ -16,6 +16,5 @@ const superuserSchema = new mongoose.Schema({
     }],
   });
 
-  const Superuser = mongoose.model('Superuser', superuserSchema)
- 
-export default Superuser
+  export default mongoose.model('Superuser', User);
+

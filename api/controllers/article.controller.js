@@ -1,8 +1,10 @@
 import Article from '../models/article.model.js';
+import User from '../models/user.model.js';
 
 
 const ArticleController = {
 
+  //TESTED AND IT WORKS!!!!
   getArticlesByYearAndMonth: async (req, res) => { 
     try {
       const { year, month } = req.query;
@@ -37,7 +39,7 @@ const ArticleController = {
   },
 
 
-
+//TESTED AND IT WORKS!!!!
   getArticleById: async (req, res) => {
     try {
       const articleId = req.params.id;
@@ -55,36 +57,51 @@ const ArticleController = {
     }
   },
 
+//TESTED AND IT WORKS!!!!
   saveArticle: async (req, res) => {
     try {
       const articleId = req.params.id;
-
+      const userId = '647bbd1c2e2923c7c339a7c1'; // Assuming you have the "superuser" ID explicitly
+  
+      console.log('Article ID:', articleId);
+      console.log('User ID:', userId);
+  
       // Save an article to the user's saved articles list
-      const userId = req.user.id; // Assuming authentication and have access to the user ID
-      await User.findByIdAndUpdate(userId, { $push: { savedArticles: articleId } });
-
+      await User.findByIdAndUpdate(
+        userId,
+        { $addToSet: { savedArticles: articleId } }
+      );
+  
       res.status(200).json({ message: 'Article saved successfully' });
     } catch (error) {
+      console.error('Error saving article:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  },
+   
+ //TESTED AND IT WORKS!!!! 
+  deleteArticle: async (req, res) => {
+    try {
+      const articleId = req.params.id;
+      const userId = '647bbd1c2e2923c7c339a7c1'; // Assuming you have the "superuser" ID explicitly
+  
+      console.log('Article ID:', articleId);
+      console.log('User ID:', userId);
+  
+      // Save an article to the user's saved articles list
+      await User.findByIdAndUpdate(
+        userId,
+        { $pull: { savedArticles: articleId } }
+      );
+  
+      res.status(200).json({ message: 'Article deleted successfully' });
+    } catch (error) {
+      console.error('Error deleting article:', error);
       res.status(500).json({ error: 'Internal server error' });
     }
   },
 
-  deleteArticle: async (req, res) => {
-    try {
-      const articleId = req.params.id;
+}
 
-      // Delete a saved article from the user's list
-      // TO DO: Update the user document to remove the article from the saved articles array
-      const userId = req.user.id; // Assuming you have implemented authentication and have access to the user ID
-      await User.findByIdAndUpdate(userId, { $pull: { savedArticles: articleId } });
-
-      res.status(200).json({ message: 'Article deleted successfully' });
-    } catch (error) {
-      res.status(500).json({ error: 'Internal server error' });
-    }
-  }
-};
 
 export default ArticleController;
-
- 
