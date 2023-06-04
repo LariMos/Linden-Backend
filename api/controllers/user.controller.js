@@ -44,7 +44,7 @@ const UserController = {
 
   try {
     // Find user in the database based on the provided username
-    const user = await User.findOne({ username });
+    const user = await User.findOne({ supername });
 
     if (user && user.password === password) {
       // Username and password match
