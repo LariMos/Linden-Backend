@@ -1,5 +1,5 @@
 // Packages and modules
-// import { seedDatabase } from '../BACK/seed/seed.js';
+import { seedDatabase } from './seed/seed.js';
 import express from 'express';
 import connection from './db/connections.js';
 import dotenv from 'dotenv';
@@ -34,7 +34,7 @@ connection.on('error', (error) => {
   console.error('MongoDB connection error:', error);
 });
 
-
+// seedDatabase();
   
 // MongoDB connection event handlers TO SEED. COMMENT OUT
 // connection.on('connected', async () => {

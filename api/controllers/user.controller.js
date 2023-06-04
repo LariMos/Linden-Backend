@@ -24,7 +24,8 @@ const UserController = {
 //TO TEST
   updateUserProfile: async (req, res) => {
     try {
-      const userId = req.user.id; // Assuming implemented authentication and have access to the user ID
+      const userId = req.user.id; // 
+
       const updatedProfile = req.body;
 
       // Update the user's profile information
@@ -35,6 +36,29 @@ const UserController = {
       res.status(500).json({ error: 'Internal server error' });
     }
   },
+
+  //LOG-IN
+  // Route to check if username and password match
+  logInProfile: async (req, res) => {
+  const { username, password } = req.body;
+
+  try {
+    // Find user in the database based on the provided username
+    const user = await User.findOne({ username });
+
+    if (user && user.password === password) {
+      // Username and password match
+      return res.status(200).json({ message: 'Login successful' });
+    } else {
+      // Invalid username or password
+      return res.status(401).json({ error: 'Invalid username or password' });
+    }
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: 'Server error' });
+  }
+  }
+
 };
 
 export default UserController;
