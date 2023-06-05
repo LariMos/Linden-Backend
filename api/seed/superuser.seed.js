@@ -12,7 +12,7 @@ const seedSuperuser = async () => {
     });
 
     const superuser = new User({
-      username: 'superuser',
+      username: 'John',
       password: 'password123',
       savedArticles: [],
     });
