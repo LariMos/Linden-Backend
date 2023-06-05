@@ -1,5 +1,5 @@
-import Superuser from '../models/user.model.js';
-import Article from '../models/article.model.js';
+import User from '../models/user.model.js';
+// import Article from '../models/article.model.js';
 
 const UserController = {
   
@@ -44,7 +44,7 @@ const UserController = {
 
   try {
     // Find user in the database based on the provided username
-    const user = await User.findOne({ supername });
+    const user = await User.findOne({ username });
 
     if (user && user.password === password) {
       // Username and password match
